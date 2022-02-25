@@ -1,0 +1,7 @@
+---
+- name: restart owntone
+  systemd:
+    name: owntone
+    daemon_reload: true
+    state: restarted
+  become: true

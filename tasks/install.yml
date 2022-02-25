@@ -1,0 +1,49 @@
+---
+- name: "Check if {{ owntone_path_binary }} exists"
+  stat:
+    path: "{{ owntone_path_binary }}"
+  register: binary_register
+  tags: owntone
+
+- name: Get installed version
+  shell: "{{ binary_register.stat.path }} --version | cut -f2 -d ' '"
+  register: version_register
+  changed_when: false
+  when: binary_register.stat.exists
+  tags: owntone
+
+- name: Set install variables
+  set_fact:
+    owntone_installed: "{{ binary_register.stat.exists }}"
+    owntone_installed_version: "{{ version_register.stdout | default('') }}"
+  tags: owntone
+
+- block:
+    - name: Download owntone source
+      git:
+        repo: "{{ owntone_git_repo }}"
+        dest: "{{ owntone_git_dest }}"
+        version: "{{ owntone_version }}"
+      become: true
+      tags: owntone
+
+    - name: Configure owntone build
+      shell:
+        cmd: "autoreconf -i && ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --enable-install-user {{ owntone_configure_args }}"
+        chdir: "{{ owntone_git_dest }}"
+      become: true
+      tags: owntone
+    
+    - name: Install owntone
+      make:
+        chdir: "{{ owntone_git_dest }}"
+        target: install
+      become: true
+      tags: owntone
+
+  when: ('owntone_reinstall' in ansible_run_tags) or not owntone_installed or owntone_installed_version != owntone_version
+  notify: restart owntone
+  become: true
+  tags:
+    - owntone
+    - owntone_reinstall

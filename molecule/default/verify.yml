@@ -1,0 +1,22 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  vars_files:
+    - ../../defaults/main.yml
+  tasks:
+    - name: Get installed version
+      shell: "{{ owntone_path_binary }} --version | cut -f2 -d ' '"
+      register: version_register
+      changed_when: false
+
+    - name: Collect facts about system services
+      service_facts:
+      register: services_state
+
+    - name: Assert
+      assert:
+        that:
+          - services_state.ansible_facts.services["owntone.service"]["state"] == "running"
+          - services_state.ansible_facts.services["owntone.service"]["status"] == "enabled"
+          - version_register.stdout == owntone_version

@@ -1,0 +1,25 @@
+---
+- name: Install owntone packages
+  apt:
+    name: "{{ owntone_packages }}"
+    state: present
+  become: true
+  tags: owntone
+
+- import_tasks: install.yml
+
+- name: Copy owntone config file
+  copy:
+    content: "{{ owntone_config }}"
+    dest: "{{ owntone_path_config }}"
+  become: true
+  notify: restart owntone
+  tags: owntone
+  when: owntone_config is defined
+
+- name: Enable owntone
+  systemd:
+    name: owntone
+    enabled: true
+  become: true
+  tags: owntone

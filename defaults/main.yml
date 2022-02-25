@@ -1,0 +1,49 @@
+---
+owntone_packages:
+  - alsa-utils
+  - antlr3
+  - autoconf
+  - automake
+  - autotools-dev
+  - avahi-daemon
+  - bison
+  - build-essential
+  - flex
+  - gawk
+  - gettext
+  - git
+  - gperf
+  - libantlr3c-dev
+  - libasound2-dev
+  - libavahi-client-dev
+  - libavcodec-dev
+  - libavfilter-dev
+  - libavformat-dev
+  - libavutil-dev
+  - libconfuse-dev
+  - libcurl4-openssl-dev
+  - libevent-dev
+  - libgcrypt20-dev
+  - libjson-c-dev
+  - libmxml-dev
+  - libplist-dev
+  - libprotobuf-c-dev
+  - libsodium-dev
+  - libsqlite3-dev
+  - libswscale-dev
+  - libtool
+  - libunistring-dev
+  - libwebsockets-dev
+  - zlib1g-dev
+
+owntone_version: "28.3"
+
+owntone_git_repo: https://github.com/owntone/owntone-server.git
+owntone_git_dest: /usr/local/src/owntone
+
+owntone_path_binary: /usr/sbin/owntone
+owntone_path_config: /etc/owntone.conf
+
+owntone_configure_args: ""
+
+#owntone_config:
