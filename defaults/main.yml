@@ -1,4 +1,6 @@
 ---
+owntone_version: "28.3"
+
 owntone_packages:
   - alsa-utils
   - antlr3
@@ -24,10 +26,12 @@ owntone_packages:
   - libcurl4-openssl-dev
   - libevent-dev
   - libgcrypt20-dev
+  - libgnutls28-dev
   - libjson-c-dev
   - libmxml-dev
   - libplist-dev
   - libprotobuf-c-dev
+  - libpulse-dev
   - libsodium-dev
   - libsqlite3-dev
   - libswscale-dev
@@ -36,8 +40,6 @@ owntone_packages:
   - libwebsockets-dev
   - zlib1g-dev
 
-owntone_version: "28.3"
-
 owntone_git_repo: https://github.com/owntone/owntone-server.git
 owntone_git_dest: /usr/local/src/owntone
 
@@ -45,5 +47,4 @@ owntone_path_binary: /usr/sbin/owntone
 owntone_path_config: /etc/owntone.conf
 
 owntone_configure_args: ""
-
 #owntone_config:
