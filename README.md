@@ -21,13 +21,26 @@ owntone_config: |
   # owntone config from /etc/owntone.conf
 ```
 
-Pass arguments to configure command when building OwnTone. List of arguments at [OwnTone Install Docs](https://github.com/owntone/owntone-server/blob/master/INSTALL.md#quick-version-for-debianubuntu-users).
+Enable or disable OwnTone features.
 
 ```yaml
-owntone_configure_args: ""
+owntone_enable_chromecast: false # Enable chromecast
+owntone_enable_libspotify: false # Enable libspotify, does not works as of yet
+owntone_enable_pulseaudio: false # Enable pulseaudio
+
+owntone_disable_spotify: false # Disable built-in spotify
+owntone_disable_playerwebui: false # Disable web-ui
+owntone_disable_livewebui: false # Disable websockets for web-ui
 ```
 
 ## Tags
+
+Only run the OwnTone role with the `owntone` tag.
+
+```
+ansible-playbook main.yml --tags owntone
+```
+
 
 Reinstall OwnTone with the `owntone_reinstall` tag.
 

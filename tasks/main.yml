@@ -1,4 +1,16 @@
 ---
+- name: Add chromecast package
+  set_fact:
+    owntone_packages: "{{ owntone_packages + [owntone_package_chromecast] }}"
+  tags: owntone
+  when: owntone_enable_chromecast | bool
+
+- name: Add pulseaudio package
+  set_fact:
+    owntone_packages: "{{ owntone_packages + [owntone_package_pulseaudio] }}"
+  tags: owntone
+  when: owntone_enable_pulseaudio | bool
+
 - name: Install owntone packages
   apt:
     name: "{{ owntone_packages }}"

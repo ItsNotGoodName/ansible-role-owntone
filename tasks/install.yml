@@ -29,11 +29,35 @@
 
     - name: Configure owntone build
       shell:
-        cmd: "autoreconf -i && ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --enable-install-user {{ owntone_configure_args }}"
+        cmd: >
+          autoreconf -i
+          && ./configure
+          --prefix=/usr
+          --sysconfdir=/etc
+          --localstatedir=/var
+          --enable-install-user
+          {% if owntone_enable_chromecast %}
+          --enable-chromecast
+          {% endif %}
+          {% if owntone_enable_libspotify %}
+          --enable-libspotify
+          {% endif %}
+          {% if owntone_enable_pulseaudio %}
+          --with-pulseaudio
+          {% endif %}
+          {% if owntone_disable_spotify %}
+          --disable-spotify
+          {% endif %}
+          {% if owntone_disable_playerwebui %}
+          --disable-webinterface
+          {% endif %}
+          {% if owntone_disable_livewebui %}
+          --without-libwebsockets
+          {% endif %}
         chdir: "{{ owntone_git_dest }}"
       become: true
       tags: owntone
-    
+
     - name: Install owntone
       make:
         chdir: "{{ owntone_git_dest }}"
