@@ -1,6 +1,10 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    owntone_enable_chromecast: true
+    owntone_enable_libspotify: true
+    owntone_enable_pulseaudio: true
   pre_tasks:
     - name: Update apt cache
       apt: update_cache=true cache_valid_time=600

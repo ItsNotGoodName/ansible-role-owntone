@@ -1,0 +1,29 @@
+---
+- name: Add libspotify package
+  set_fact:
+    owntone_packages: "{{ owntone_packages + [owntone_package_libspotify] }}"
+  tags: owntone
+
+- name: Install gpg
+  apt:
+    name: gpg
+    state: present
+  become: true
+  tags: owntone
+
+- name: Add mopidy key
+  apt_key:
+    url: https://apt.mopidy.com/mopidy.gpg
+    state: present
+  become: true
+  tags: owntone
+
+- name: Add mopidy repo
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  become: true
+  tags: owntone
+  loop:
+    - deb https://apt.mopidy.com/ buster main contrib non-free
+    - deb-src https://apt.mopidy.com/ buster main contrib non-free

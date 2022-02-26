@@ -2,6 +2,7 @@
 owntone_version: "28.3"
 
 owntone_package_chromecast: libgnutls28-dev
+owntone_package_libspotify: libspotify-dev
 owntone_package_pulseaudio: libpulse-dev
 owntone_packages:
   - alsa-utils
@@ -47,7 +48,7 @@ owntone_path_binary: /usr/sbin/owntone
 owntone_path_config: /etc/owntone.conf
 
 owntone_enable_chromecast: false # Enable chromecast
-owntone_enable_libspotify: false # Enable libspotify, does not works as of yet
+owntone_enable_libspotify: false # Enable libspotify
 owntone_enable_pulseaudio: false # Enable pulseaudio
 
 owntone_disable_spotify: false # Disable built-in spotify

@@ -25,7 +25,7 @@ Enable or disable OwnTone features.
 
 ```yaml
 owntone_enable_chromecast: false # Enable chromecast
-owntone_enable_libspotify: false # Enable libspotify, does not works as of yet
+owntone_enable_libspotify: false # Enable libspotify
 owntone_enable_pulseaudio: false # Enable pulseaudio
 
 owntone_disable_spotify: false # Disable built-in spotify
@@ -40,7 +40,6 @@ Only run the OwnTone role with the `owntone` tag.
 ```
 ansible-playbook main.yml --tags owntone
 ```
-
 
 Reinstall OwnTone with the `owntone_reinstall` tag.
 

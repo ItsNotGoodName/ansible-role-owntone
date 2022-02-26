@@ -11,6 +11,10 @@
   tags: owntone
   when: owntone_enable_pulseaudio | bool
 
+- import_tasks: libspotify.yml
+  when: owntone_enable_libspotify | bool
+  tags: owntone
+
 - name: Install owntone packages
   apt:
     name: "{{ owntone_packages }}"
