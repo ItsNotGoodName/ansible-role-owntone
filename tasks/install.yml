@@ -30,8 +30,8 @@
     - name: Configure owntone build
       shell:
         cmd: >
-          autoreconf -i
-          && ./configure
+          autoreconf -i &&
+          ./configure
           --prefix=/usr
           --sysconfdir=/etc
           --localstatedir=/var

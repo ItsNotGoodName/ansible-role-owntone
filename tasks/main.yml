@@ -28,6 +28,9 @@
   copy:
     content: "{{ owntone_config }}"
     dest: "{{ owntone_path_config }}"
+    owner: owntone
+    group: owntone
+    mode: "0600"
   become: true
   notify: restart owntone
   tags: owntone
