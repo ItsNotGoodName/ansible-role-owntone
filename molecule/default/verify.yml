@@ -19,4 +19,6 @@
         that:
           - services_state.ansible_facts.services["owntone.service"]["state"] == "running"
           - services_state.ansible_facts.services["owntone.service"]["status"] == "enabled"
+          - services_state.ansible_facts.services["pulseaudio.service"]["state"] == "running"
+          - services_state.ansible_facts.services["pulseaudio.service"]["status"] == "enabled"
           - version_register.stdout == owntone_version

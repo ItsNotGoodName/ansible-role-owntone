@@ -1,9 +1,13 @@
 ---
 owntone_version: "28.3"
 
-owntone_package_chromecast: libgnutls28-dev
-owntone_package_libspotify: libspotify-dev
-owntone_package_pulseaudio: libpulse-dev
+owntone_packages_chromecast:
+  - libgnutls28-dev
+owntone_packages_libspotify:
+  - libspotify-dev
+owntone_packages_pulseaudio:
+  - libpulse-dev
+  - pulseaudio
 owntone_packages:
   - alsa-utils
   - antlr3

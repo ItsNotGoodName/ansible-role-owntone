@@ -1,7 +1,7 @@
 ---
-- name: Add libspotify package
+- name: Add libspotify packages
   set_fact:
-    owntone_packages: "{{ owntone_packages + [owntone_package_libspotify] }}"
+    owntone_packages: "{{ owntone_packages + owntone_packages_libspotify }}"
   tags: owntone
 
 - name: Install gpg

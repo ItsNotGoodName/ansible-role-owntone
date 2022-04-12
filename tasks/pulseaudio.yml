@@ -1,0 +1,22 @@
+---
+- name: Install pulseaudio packages
+  apt:
+    name: "{{ owntone_packages_pulseaudio }}"
+    state: present
+  become: true
+  tags: owntone
+
+- name: Template pulseaudio service file
+  template:
+    src: pulseaudio.service.j2
+    dest: /etc/systemd/system/pulseaudio.service
+  become: true
+  tags: owntone
+
+- name: Enable and start pulseaudio service
+  systemd:
+    name: pulseaudio
+    enabled: true
+    state: started
+  become: true
+  tags: owntone
