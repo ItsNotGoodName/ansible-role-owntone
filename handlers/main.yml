@@ -5,3 +5,7 @@
     daemon_reload: true
     state: restarted
   become: true
+
+- name: commit alsa intel audio static fix
+  ansible.builtin.shell: echo {{ (owntone_alsa_intel_audio_static_fix | bool) | ternary('0', '1') }} > /sys/module/snd_hda_intel/parameters/power_save
+  become: true

@@ -50,6 +50,7 @@
     dest: /etc/modprobe.d/alsa-base.conf
     mode: 0644
   become: true
+  notify: commit alsa intel audio static fix
   tags: owntone
   when: owntone_alsa_intel_audio_static_fix | bool
 
@@ -58,5 +59,6 @@
     path: /etc/modprobe.d/alsa-base.conf
     state: absent
   become: true
+  notify: commit alsa intel audio static fix
   tags: owntone
   when: not (owntone_alsa_intel_audio_static_fix | bool)
