@@ -1,9 +1,4 @@
 ---
-- name: Add libspotify package
-  ansible.builtin.set_fact:
-    owntone_packages: "{{ owntone_packages + [owntone_package_libspotify] }}"
-  tags: owntone
-
 - name: Install gpg
   ansible.builtin.apt:
     name: gpg

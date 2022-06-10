@@ -1,21 +1,22 @@
 ---
-- name: Add chromecast package
+- name: Add extra packages
   ansible.builtin.set_fact:
-    owntone_packages: "{{ owntone_packages + [owntone_package_chromecast] }}"
+    owntone_packages: "{{ owntone_packages + [item.package] }}"
   tags: owntone
-  when: owntone_enable_chromecast | bool
-
-- name: Add pulseaudio package
-  ansible.builtin.set_fact:
-    owntone_packages: "{{ owntone_packages + [owntone_package_pulseaudio] }}"
-  tags: owntone
-  when: owntone_enable_pulseaudio | bool
+  when: item.enable | bool
+  loop:
+    - package: "{{ owntone_package_chromecast }}"
+      enable: "{{ owntone_enable_chromecast }}"
+    - package: "{{ owntone_package_pulseaudio }}"
+      enable: "{{ owntone_enable_pulseaudio }}"
+    - package: "{{ owntone_package_libspotify }}"
+      enable: "{{ owntone_enable_libspotify }}"
 
 - import_tasks: libspotify.yml
   when: owntone_enable_libspotify | bool
   tags: owntone
 
-- name: Install owntone packages
+- name: Install packages
   ansible.builtin.apt:
     name: "{{ owntone_packages }}"
     state: present
@@ -23,20 +24,21 @@
   tags: owntone
 
 - import_tasks: install.yml
+  tags: owntone
 
-- name: Copy owntone config file
+- name: Copy config file
   ansible.builtin.copy:
     content: "{{ owntone_config }}"
     dest: "{{ owntone_path_config }}"
     owner: owntone
     group: owntone
-    mode: "0600"
+    mode: 0600
   become: true
   notify: restart owntone
   tags: owntone
   when: owntone_config is defined
 
-- name: Enable owntone
+- name: Enable service
   ansible.builtin.systemd:
     name: owntone
     enabled: true
