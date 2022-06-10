@@ -6,17 +6,21 @@
     - ../../defaults/main.yml
   tasks:
     - name: Get installed version
-      shell: "{{ owntone_path_binary }} --version | cut -f2 -d ' '"
-      register: version_register
+      ansible.builtin.shell: |
+        set -o pipefail
+        {{ owntone_path_binary }} --version | cut -f2 -d ' '
+      args:
+        executable: /bin/bash
+      register: owntone_version_register
       changed_when: false
 
     - name: Collect facts about system services
-      service_facts:
+      ansible.builtin.service_facts:
       register: services_state
 
     - name: Assert
-      assert:
+      ansible.builtin.assert:
         that:
           - services_state.ansible_facts.services["owntone.service"]["state"] == "running"
           - services_state.ansible_facts.services["owntone.service"]["status"] == "enabled"
-          - version_register.stdout == owntone_version
+          - owntone_version_register.stdout == owntone_version

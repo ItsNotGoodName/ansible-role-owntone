@@ -1,6 +1,6 @@
 ---
 - name: restart owntone
-  systemd:
+  ansible.builtin.systemd:
     name: owntone
     daemon_reload: true
     state: restarted

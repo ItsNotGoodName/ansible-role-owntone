@@ -1,12 +1,12 @@
 ---
 - name: Add chromecast package
-  set_fact:
+  ansible.builtin.set_fact:
     owntone_packages: "{{ owntone_packages + [owntone_package_chromecast] }}"
   tags: owntone
   when: owntone_enable_chromecast | bool
 
 - name: Add pulseaudio package
-  set_fact:
+  ansible.builtin.set_fact:
     owntone_packages: "{{ owntone_packages + [owntone_package_pulseaudio] }}"
   tags: owntone
   when: owntone_enable_pulseaudio | bool
@@ -16,7 +16,7 @@
   tags: owntone
 
 - name: Install owntone packages
-  apt:
+  ansible.builtin.apt:
     name: "{{ owntone_packages }}"
     state: present
   become: true
@@ -25,7 +25,7 @@
 - import_tasks: install.yml
 
 - name: Copy owntone config file
-  copy:
+  ansible.builtin.copy:
     content: "{{ owntone_config }}"
     dest: "{{ owntone_path_config }}"
     owner: owntone
@@ -37,23 +37,24 @@
   when: owntone_config is defined
 
 - name: Enable owntone
-  systemd:
+  ansible.builtin.systemd:
     name: owntone
     enabled: true
   become: true
   tags: owntone
 
 - name: Fix static noise on Intel audio
-  copy:
+  ansible.builtin.copy:
     content: >
       options snd-hda-intel power_save=0 power_save_controller=N
     dest: /etc/modprobe.d/alsa-base.conf
+    mode: 0644
   become: true
   tags: owntone
   when: owntone_alsa_intel_audio_static_fix | bool
 
 - name: Unfix static noise on Intel audio
-  file:
+  ansible.builtin.file:
     path: /etc/modprobe.d/alsa-base.conf
     state: absent
   become: true

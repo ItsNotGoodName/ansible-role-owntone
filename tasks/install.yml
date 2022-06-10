@@ -1,26 +1,30 @@
 ---
 - name: "Check if {{ owntone_path_binary }} exists"
-  stat:
+  ansible.builtin.stat:
     path: "{{ owntone_path_binary }}"
-  register: binary_register
+  register: owntone_binary_register
   tags: owntone
 
 - name: Get installed version
-  shell: "{{ binary_register.stat.path }} --version | cut -f2 -d ' '"
-  register: version_register
+  ansible.builtin.shell: |
+    set -o pipefail
+    {{ owntone_binary_register.stat.path }} --version | cut -f2 -d ' '
+  args:
+    executable: /bin/bash
+  register: owntone_version_register
   changed_when: false
-  when: binary_register.stat.exists
+  when: owntone_binary_register.stat.exists
   tags: owntone
 
 - name: Set install variables
-  set_fact:
-    owntone_installed: "{{ binary_register.stat.exists }}"
-    owntone_installed_version: "{{ version_register.stdout | default('') }}"
+  ansible.builtin.set_fact:
+    owntone_installed: "{{ owntone_binary_register.stat.exists }}"
+    owntone_installed_version: "{{ owntone_version_register.stdout | default('') }}"
   tags: owntone
 
 - block:
     - name: Download owntone source
-      git:
+      ansible.builtin.git:
         repo: "{{ owntone_git_repo }}"
         dest: "{{ owntone_git_dest }}"
         version: "{{ owntone_version }}"
@@ -28,7 +32,7 @@
       tags: owntone
 
     - name: Configure owntone build
-      shell:
+      ansible.builtin.shell:
         cmd: >
           autoreconf -i &&
           ./configure
@@ -55,11 +59,12 @@
           --without-libwebsockets
           {% endif %}
         chdir: "{{ owntone_git_dest }}"
+      changed_when: true
       become: true
       tags: owntone
 
     - name: Install owntone
-      make:
+      ansible.builtin.make:
         chdir: "{{ owntone_git_dest }}"
         target: install
       become: true
