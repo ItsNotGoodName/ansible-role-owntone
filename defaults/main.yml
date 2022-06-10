@@ -41,6 +41,8 @@ owntone_packages:
   - libwebsockets-dev
   - zlib1g-dev
 
+owntone_alsa_intel_audio_static_fix: false
+
 owntone_git_repo: https://github.com/owntone/owntone-server.git
 owntone_git_dest: /usr/local/src/owntone
 

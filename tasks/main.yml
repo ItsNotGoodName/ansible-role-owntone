@@ -42,3 +42,20 @@
     enabled: true
   become: true
   tags: owntone
+
+- name: Fix static noise on Intel audio
+  copy:
+    content: >
+      options snd-hda-intel power_save=0 power_save_controller=N
+    dest: /etc/modprobe.d/alsa-base.conf
+  become: true
+  tags: owntone
+  when: owntone_alsa_intel_audio_static_fix | bool
+
+- name: Unfix static noise on Intel audio
+  file:
+    path: /etc/modprobe.d/alsa-base.conf
+    state: absent
+  become: true
+  tags: owntone
+  when: not (owntone_alsa_intel_audio_static_fix | bool)
