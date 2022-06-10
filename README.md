@@ -11,7 +11,7 @@ N/A
 Change OwnTone version with `owntone_version` variable.
 
 ```yaml
-owntone_version: "28.3"
+owntone_version: "28.4"
 ```
 
 Configure OwnTone when the variable `owntone_config` is defined.
@@ -31,6 +31,12 @@ owntone_enable_pulseaudio: false # Enable pulseaudio
 owntone_disable_spotify: false # Disable built-in spotify
 owntone_disable_playerwebui: false # Disable web-ui
 owntone_disable_livewebui: false # Disable websockets for web-ui
+```
+
+Remove static audio when not playing anything. Only works when using ALSA with Intel Audio.
+
+```
+owntone_alsa_intel_audio_static_fix: true
 ```
 
 ## Tags

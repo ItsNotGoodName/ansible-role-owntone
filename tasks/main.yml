@@ -43,7 +43,7 @@
   become: true
   tags: owntone
 
-- name: Fix static noise on Intel audio
+- name: Fix static noise on intel audio
   ansible.builtin.copy:
     content: >
       options snd-hda-intel power_save=0 power_save_controller=N
@@ -54,7 +54,7 @@
   tags: owntone
   when: owntone_alsa_intel_audio_static_fix | bool
 
-- name: Unfix static noise on Intel audio
+- name: Unfix static noise on intel audio
   ansible.builtin.file:
     path: /etc/modprobe.d/alsa-base.conf
     state: absent
