@@ -1,5 +1,5 @@
 ---
-owntone_version: "28.3"
+owntone_version: "28.4"
 
 owntone_package_chromecast: libgnutls28-dev
 owntone_package_libspotify: libspotify-dev
