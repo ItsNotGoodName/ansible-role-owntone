@@ -1,7 +1,9 @@
 ---
 - name: Install gpg
   ansible.builtin.apt:
-    name: gpg
+    name:
+      - gpg
+      - gpg-agent
     state: present
   become: true
   tags: owntone

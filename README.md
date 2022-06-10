@@ -1,6 +1,6 @@
 # ansible-role-owntone
 
-Install and configure [OwnTone](https://github.com/owntone/owntone-server) on Debian 11.
+Install and configure [OwnTone](https://github.com/owntone/owntone-server) on Debian and Ubuntu.
 
 ## Requirements
 
@@ -35,7 +35,7 @@ owntone_disable_livewebui: false # Disable websockets for web-ui
 
 Remove static audio when not playing anything. Only works when using ALSA with Intel Audio.
 
-```
+```yaml
 owntone_alsa_intel_audio_static_fix: true
 ```
 

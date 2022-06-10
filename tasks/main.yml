@@ -1,5 +1,5 @@
 ---
-- name: Add extra packages
+- name: Add feature packages
   ansible.builtin.set_fact:
     owntone_packages: "{{ owntone_packages + [item.package] }}"
   tags: owntone
@@ -20,6 +20,7 @@
   ansible.builtin.apt:
     name: "{{ owntone_packages }}"
     state: present
+    install_recommends: false
   become: true
   tags: owntone
 
