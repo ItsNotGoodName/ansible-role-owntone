@@ -16,11 +16,23 @@
   when: owntone_enable_libspotify | bool
   tags: owntone
 
+- name: Create man directories
+  file:
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+  loop:
+    - /usr/share/man/man1
+    - /usr/share/man/man8
+  become: true
+  tags: owntone
+
 - name: Install packages
   ansible.builtin.apt:
     name: "{{ owntone_packages }}"
     state: present
-    install_recommends: false
   become: true
   tags: owntone
 
