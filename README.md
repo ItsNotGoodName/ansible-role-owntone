@@ -2,16 +2,16 @@
 
 Install and configure [OwnTone](https://github.com/owntone/owntone-server) on Debian and Ubuntu.
 
-## Requirements
+# Requirements
 
 N/A
 
-## Role Variables
+# Role Variables
 
 Change OwnTone version with `owntone_version` variable.
 
 ```yaml
-owntone_version: "28.4"
+owntone_version: "28.6"
 ```
 
 Configure OwnTone when the variable `owntone_config` is defined.
@@ -39,7 +39,7 @@ Remove static audio when not playing anything. Only works when using ALSA with I
 owntone_alsa_intel_audio_static_fix: true
 ```
 
-## Tags
+# Tags
 
 Only run the OwnTone role with the `owntone` tag.
 
@@ -53,22 +53,14 @@ Reinstall OwnTone with the `owntone_reinstall` tag.
 ansible-playbook main.yml --tags owntone_reinstall
 ```
 
-## Dependencies
+# Dependencies
 
 N/A
 
-## Example Playbook
+# Example Playbook
 
 ```yaml
 - hosts: all
   roles:
     - itsnotgoodname.owntone
 ```
-
-## License
-
-MIT
-
-## Author Information
-
-ItsNotGoodName

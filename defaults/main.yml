@@ -1,5 +1,5 @@
 ---
-owntone_version: "28.4"
+owntone_version: "28.6"
 
 owntone_package_chromecast: libgnutls28-dev
 owntone_package_libspotify: libspotify-dev
@@ -56,4 +56,5 @@ owntone_enable_pulseaudio: false # Enable pulseaudio
 owntone_disable_spotify: false # Disable built-in spotify
 owntone_disable_playerwebui: false # Disable web-ui
 owntone_disable_livewebui: false # Disable websockets for web-ui
+
 #owntone_config:
