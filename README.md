@@ -11,7 +11,7 @@ N/A
 Change OwnTone version with `owntone_version` variable.
 
 ```yaml
-owntone_version: "28.6"
+owntone_version: "28.8"
 ```
 
 Configure OwnTone when the variable `owntone_config` is defined.
